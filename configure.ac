@@ -77,7 +77,7 @@ AC_FUNC_LSTAT
 AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
 AC_FUNC_VPRINTF
 
-AC_CHECK_HEADERS([fcntl.h limits.h syslog.h termios.h])
+AC_CHECK_HEADERS([fcntl.h limits.h syslog.h termios.h sys/types.h])
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 
