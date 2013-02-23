@@ -46,11 +46,8 @@ AC_CHECK_HEADER([security/pam_modules.h],, [AC_MSG_ERROR([*** Sorry, you have to
 
 AC_CHECK_HEADERS([security/_pam_macros.h security/pam_misc.h security/openpam.h])
 
-AM_DL()
-
-AC_CHECK_LIB(pam_misc, misc_conv)
-
-LIBS="$LIBS $DYNAMIC_LD_LIBS -lpam"
+AC_CHECK_LIB([pam], [pam_start])
+AC_CHECK_LIB([pam_misc], [misc_conv])
 
 AC_ARG_WITH([pammoddir],
 	AC_HELP_STRING([--with-pammoddir], [Install module in specified directory]),
