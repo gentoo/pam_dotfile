@@ -33,6 +33,7 @@ pam_dotfile_gen_CFLAGS = $(AM_CFLAGS)
 
 pam_dotfile_helper_SOURCES = pam-dotfile-helper.c md5.c md5.h md5util.c md5util.h common.c common.h log.c log.h 
 pam_dotfile_helper_CFLAGS = $(AM_CFLAGS)
+pam_dotfile_helper_LDFLAGS = $(AM_LDFLAGS) -Wl,-z,now
 
 pamtest_SOURCES = pamtest.c
 
