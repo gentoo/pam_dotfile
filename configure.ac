@@ -44,16 +44,29 @@ CFLAGS="$CFLAGS -L/lib"
 # Checks for libraries.
 AC_CHECK_HEADER([security/pam_modules.h],, [AC_MSG_ERROR([*** Sorry, you have to install the PAM development files ***])])
 
-LIBS="$LIBS -ldl -lpam -lpam_misc"
+AC_CHECK_HEADERS([security/_pam_macros.h security/pam_misc.h security/openpam.h])
 
-case "$host" in
-  *-*-linux*)
-    PAM_MODDIR="/lib/security"
-    ;;
-  *)
-    PAM_MODDIR="/usr/lib"
-    ;;
-esac
+AM_DL()
+
+AC_CHECK_LIB(pam_misc, misc_conv)
+
+LIBS="$LIBS $DYNAMIC_LD_LIBS -lpam"
+
+AC_ARG_WITH([pammoddir],
+	AC_HELP_STRING([--with-pammoddir], [Install module in specified directory]),
+	[
+		PAM_MODDIR=$withval
+	], [
+		case "$host" in
+			*-*-linux*)
+				PAM_MODDIR="/lib/security"
+				;;
+			*)
+				PAM_MODDIR="/usr/lib"
+				;;
+		esac
+	])
+
 AC_SUBST(PAM_MODDIR)
 
 # Checks for header files.

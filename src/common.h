@@ -21,7 +21,10 @@
 ***/
 
 #include <security/pam_modules.h>
-#include <security/_pam_macros.h>
+#include <security/pam_appl.h>
+#ifdef HAVE_SECURITY__PAM_MACROS_H
+#  include <security/_pam_macros.h>
+#endif
 
 typedef struct context {
     int opt_debug;

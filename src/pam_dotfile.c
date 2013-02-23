@@ -29,11 +29,19 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 #define PAM_SM_AUTH
 
 #include <security/pam_modules.h>
-#include <security/_pam_macros.h>
+#include <security/pam_appl.h>
+#ifdef HAVE_SECURITY__PAM_MACROS_H
+#  include <security/_pam_macros.h>
+#endif
+
+#ifndef x_strdup
+#  define x_strdup(s)  ( (s) ? strdup(s):NULL )
+#endif
 
 #include "md5.h"
 #include "md5util.h"

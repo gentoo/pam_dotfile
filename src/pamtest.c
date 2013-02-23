@@ -19,11 +19,28 @@
 
 #include <stdio.h>
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <security/pam_appl.h>
-#include <security/pam_misc.h>
+
+#ifdef HAVE_SECURITY_PAM_MISC_H
+#  include <security/pam_misc.h>
+#endif
+
+#ifdef HAVE_SECURITY_OPENPAM_H
+#  include <security/openpam.h>
+#endif
 
 int main(int argc, char*argv[]) {
+#ifdef HAVE_LIBPAM_MISC
     static struct pam_conv pc = { misc_conv, NULL };
+#elif defined(_OPENPAM)
+    static struct pam_conv pc = { openpam_nullconv, NULL };
+#else
+    static struct pam_conv pc = { NULL };
+#endif
     pam_handle_t *ph = NULL;
     int r, ret;
     char *username, *procname, *service;
