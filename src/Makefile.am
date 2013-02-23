@@ -22,7 +22,7 @@ moduledir = @PAM_MODDIR@
 module_LTLIBRARIES = pam_dotfile.la
 
 pam_dotfile_la_SOURCES = pam_dotfile.c md5.c md5util.c md5.h md5util.h log.c log.h common.c common.h
-pam_dotfile_la_LDFLAGS = -module -avoid-version
+pam_dotfile_la_LDFLAGS = -module -avoid-version -export-symbols-regex '^pam_'
 pam_dotfile_la_CFLAGS = $(AM_CFLAGS)
 
 sbin_PROGRAMS = pam-dotfile-helper
